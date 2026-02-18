@@ -55,25 +55,25 @@ export function NavOverlay() {
 
                     <motion.div
                         variants={containerVariants}
-                        className="w-full h-full max-w-7xl mx-auto grid md:grid-cols-[minmax(0,1fr)_280px] gap-8 md:gap-14 pt-20 md:pt-24 pb-8 md:pb-10 overflow-y-auto"
+                        className="w-full h-full max-w-7xl mx-auto grid md:grid-cols-[minmax(0,1fr)_240px] lg:grid-cols-[minmax(0,1fr)_280px] gap-6 md:gap-10 pt-14 md:pt-16 pb-6 md:pb-8 overflow-hidden"
                     >
                         <div className="min-h-0 flex flex-col justify-center">
                             <motion.p
                                 variants={itemVariants}
-                                className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/40 mb-4 md:mb-6"
+                                className="text-[10px] md:text-xs uppercase tracking-[0.35em] text-white/40 mb-2 md:mb-4"
                             >
                                 Site Navigation
                             </motion.p>
 
-                            <nav className="flex flex-col">
-                            {navigation.map((item, index) => (
+                            <nav className="flex flex-col gap-[clamp(0.1rem,0.7vh,0.45rem)]">
+                            {navigation.map((item) => (
                                 <div key={item.href} className="overflow-hidden">
                                     <motion.div variants={itemVariants}>
                                         <Link
                                             href={item.href}
                                             onClick={closeMenu}
                                             className={cn(
-                                                "group relative grid grid-cols-[30px_auto] md:grid-cols-[46px_auto] items-end gap-4 md:gap-6 py-1.5 md:py-2 border-b border-white/10",
+                                                "group relative grid grid-cols-[30px_auto] md:grid-cols-[42px_auto] items-end gap-3 md:gap-5 py-1 md:py-1.5 border-b border-white/10",
                                                 pathname === item.href ? "text-white" : "text-white/55 hover:text-white"
                                             )}
                                         >
@@ -83,7 +83,7 @@ export function NavOverlay() {
                                             )}>
                                                 {item.number}
                                             </span>
-                                            <span className="font-serif text-[clamp(2.5rem,9vw,6.8rem)] leading-[0.9] tracking-tight">
+                                            <span className="font-serif text-[clamp(2.1rem,7.2vh,5.2rem)] lg:text-[clamp(2.4rem,6.2vw,6.4rem)] leading-[0.9] tracking-tight">
                                                 {item.title}
                                             </span>
                                         </Link>
