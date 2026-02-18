@@ -32,7 +32,7 @@ export const navigation = [
 ] as const;
 
 export const socialLinks = [
-    // { name: "Instagram", url: "https://instagram.com/chanukamora", icon: "instagram" },
+    { name: "Instagram", url: "https://instagram.com/chanukamora", icon: "instagram" },
     { name: "YouTube", url: "https://youtube.com/@chanukamora", icon: "youtube" },
     { name: "Spotify", url: "https://open.spotify.com/artist/chanukamora", icon: "music" },
     { name: "Facebook", url: "https://facebook.com/chanukamora", icon: "facebook" },
