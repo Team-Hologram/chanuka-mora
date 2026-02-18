@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Brand Colors ── */
+    --black-void:       #000000;    /* Absolute black — hero bg, sections */
+    --black-rich:       #0A0A0A;    /* Rich black — primary bg */
+    --black-soft:       #111111;    /* Soft black — elevated surfaces */
+    --black-warm:       #141414;    /* Warm black — cards, containers */
+    --black-charcoal:   #1A1A1A;    /* Charcoal — secondary surfaces */
+    --black-graphite:   #222222;    /* Graphite — borders, dividers */
+
+    /* ── Mid Grays (Supporting) ── */
+    --gray-dark:        #333333;    /* Dark gray — secondary text dark */
+    --gray-medium:      #555555;    /* Medium gray — muted elements */
+    --gray-neutral:     #777777;    /* Neutral gray — placeholders */
+    --gray-silver:      #999999;    /* Silver — metadata text */
+    --gray-light:       #BBBBBB;    /* Light gray — secondary text */
+    --gray-pale:        #DDDDDD;    /* Pale gray — subtle borders */
+
+    /* ── Whites (Text & Accents) ── */
+    --white-pure:       #FFFFFF;    /* Pure white — primary headings */
+    --white-soft:       #F5F5F5;    /* Soft white — body text */
+    --white-warm:       #EEEEEE;    /* Warm white — secondary headings */
+    --white-muted:      #E0E0E0;    /* Muted white — descriptions */
+    --white-cream:      #FAFAFA;    /* Cream — light mode bg (if any) */
+
+    /* ── Signature Accent (Use EXTREMELY sparingly) ── */
+    --accent-gold:      #C9A96E;    /* Muted gold — hover states, active indicators */
+    --accent-gold-dim:  #8B7355;    /* Dimmed gold — subtle accents */
+    --accent-gold-glow: rgba(201, 169, 110, 0.15); /* Gold glow for hover effects */
+
+    /* ── Functional ── */
+    --overlay-heavy:    rgba(0, 0, 0, 0.85);
+    --overlay-medium:   rgba(0, 0, 0, 0.60);
+    --overlay-light:    rgba(0, 0, 0, 0.30);
+    --glass-dark:       rgba(10, 10, 10, 0.80);
+    --glass-border:     rgba(255, 255, 255, 0.06);
+    --glow-white:       rgba(255, 255, 255, 0.05);
+
+    /* ── Shadcn/UI Required Variables (Mapping to our theme) ── */
+    --background: 0 0% 4%; /* black-rich */
+    --foreground: 0 0% 100%; /* white-pure */
+
+    --card: 0 0% 8%; /* black-warm */
+    --card-foreground: 0 0% 96%; /* white-soft */
+
+    --popover: 0 0% 7%; /* black-soft */
+    --popover-foreground: 0 0% 96%;
+
+    --primary: 0 0% 100%; /* white-pure (primary actions in dark mode are white) */
+    --primary-foreground: 0 0% 0%; /* black */
+
+    --secondary: 0 0% 20%; /* gray-dark */
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 0 0% 13%; /* black-graphite */
+    --muted-foreground: 0 0% 60%; /* gray-silver */
+
+    --accent: 0 0% 20%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 13%; /* black-graphite */
+    --input: 0 0% 13%;
+    --ring: 0 0% 80%; /* near white ring */
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+    background-color: var(--black-rich);
+    color: var(--white-soft);
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--black-void);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-dark);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--gray-medium);
+  }
+
+  /* Global Selection Color */
+  ::selection {
+    background: var(--accent-gold);
+    color: var(--black-void);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .glass-panel {
+    background: var(--glass-dark);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Typography Utilities */
+  .font-heading {
+    font-family: var(--font-serif);
+    line-height: 1.1;
+  }
+  
+  .text-gold {
+    color: var(--accent-gold);
+  }
+
+  /* Grain Overlay */
+  .grain-overlay::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("/images/noise.png"); /* You'll need a noise png or use base64 */
+    background-size: 200px;
+    animation: grain 8s steps(10) infinite;
+  }
+
+  /* Vignette */
+  .vignette::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
