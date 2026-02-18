@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 export function CustomCursor() {
     const { cursorVariant, isMenuOpen } = useUIStore();
     const [isVisible, setIsVisible] = useState(false);
+    const [isCoarsePointer, setIsCoarsePointer] = useState(false);
 
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
@@ -17,33 +18,49 @@ export function CustomCursor() {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia("(pointer: coarse)");
+        const updatePointerType = () => setIsCoarsePointer(mediaQuery.matches);
+        updatePointerType();
+
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener("change", updatePointerType);
+        } else {
+            mediaQuery.addListener(updatePointerType);
+        }
+
+        return () => {
+            if (mediaQuery.removeEventListener) {
+                mediaQuery.removeEventListener("change", updatePointerType);
+            } else {
+                mediaQuery.removeListener(updatePointerType);
+            }
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isCoarsePointer) {
+            setIsVisible(false);
+            return;
+        }
+
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
-            if (!isVisible) setIsVisible(true);
+            setIsVisible(true);
         };
 
-        const handleMouseDown = () => {
-            // Could add click states here
-        };
+        const hideCursor = () => setIsVisible(false);
 
-        window.addEventListener('mousemove', moveCursor);
-        window.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener("mousemove", moveCursor);
+        window.addEventListener("mouseleave", hideCursor);
 
         return () => {
-            window.removeEventListener('mousemove', moveCursor);
-            window.removeEventListener('mousedown', handleMouseDown);
+            window.removeEventListener("mousemove", moveCursor);
+            window.removeEventListener("mouseleave", hideCursor);
         };
-    }, [cursorX, cursorY, isVisible]);
+    }, [cursorX, cursorY, isCoarsePointer]);
 
-    // Hide on touch devices
-    useEffect(() => {
-        if (window.matchMedia("(pointer: coarse)").matches) {
-            setIsVisible(false);
-        }
-    }, []);
-
-    if (!isVisible || isMenuOpen) return null;
+    if (isCoarsePointer || !isVisible || isMenuOpen) return null;
 
     return (
         <motion.div

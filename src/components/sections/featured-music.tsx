@@ -64,13 +64,13 @@ export function FeaturedMusic() {
     });
 
     return (
-        <section ref={containerRef} className="relative h-[400vh] bg-neutral-900/50">
+        <section ref={containerRef} className="relative h-[340vh] md:h-[400vh] bg-neutral-900/50">
             <div className="sticky top-0 h-screen flex flex-col overflow-hidden perspective-1000">
 
                 {/* Background Elements */}
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_0%,transparent_70%)] pointer-events-none" />
 
-                <div className="relative w-full max-w-[1920px] mx-auto px-6 md:px-12 flex flex-col h-full pt-12 md:pt-10 pb-8 md:pb-10">
+                <div className="relative w-full max-w-[1920px] mx-auto px-4 md:px-12 flex flex-col h-full pt-12 md:pt-10 pb-8 md:pb-10">
                     {/* Header */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -97,7 +97,7 @@ export function FeaturedMusic() {
                         <motion.div
                             ref={scrollRailRef}
                             style={{ x: smoothX }}
-                            className="flex w-max items-start gap-8 px-2"
+                            className="flex w-max items-start gap-4 md:gap-8 px-0 md:px-2"
                         >
                             {featuredTracks.map((track, index) => (
                                 <MusicCard3D
@@ -109,7 +109,7 @@ export function FeaturedMusic() {
 
                             {/* View All Card */}
                             <motion.div
-                                className="w-[300px] h-[350px] md:h-[400px] flex-shrink-0 flex items-center justify-center border border-white/10 rounded-2xl group hover:border-white/30 transition-colors bg-white/5 backdrop-blur-sm"
+                                className="w-[calc(100vw-2.5rem)] sm:w-[300px] min-h-[220px] md:h-[400px] flex-shrink-0 flex items-center justify-center border border-white/10 rounded-2xl group hover:border-white/30 transition-colors bg-white/5 backdrop-blur-sm p-6"
                             >
                                 <Link href="/music" className="flex flex-col items-center gap-6 text-center">
                                     <div className="w-20 h-20 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all duration-500">
@@ -133,7 +133,7 @@ function MusicCard3D({ track, index }: { track: Track, index: number }) {
 
     return (
         <motion.div
-            className="w-[280px] md:w-[340px] lg:w-[360px] flex-shrink-0"
+            className="w-[calc(100vw-2.5rem)] sm:w-[320px] md:w-[340px] lg:w-[360px] flex-shrink-0"
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -141,7 +141,7 @@ function MusicCard3D({ track, index }: { track: Track, index: number }) {
         >
             {/* We customize the TrackCard rendering slightly via props if needed, 
                  or wrap it to constrain it properly */}
-            <div className="h-[min(66vh,560px)] bg-neutral-900/40 backdrop-blur-md border border-white/5 rounded-3xl p-5 md:p-6 hover:border-white/20 transition-colors duration-500 group flex flex-col">
+            <div className="h-auto md:h-[min(66vh,560px)] bg-neutral-900/40 backdrop-blur-md border border-white/5 rounded-3xl p-5 md:p-6 hover:border-white/20 transition-colors duration-500 group flex flex-col">
                 {/* Reusing existing logic but stripping layout props for this view */}
                 <div className="relative aspect-[4/3] w-full rounded-2xl overflow-hidden mb-5 border border-white/10 shrink-0">
                     <img
@@ -165,7 +165,7 @@ function MusicCard3D({ track, index }: { track: Track, index: number }) {
                         {track.description}
                     </p>
 
-                    <div className="mt-auto pt-3 flex items-center justify-between border-t border-white/5">
+                    <div className="pt-3 md:mt-auto flex items-center justify-between border-t border-white/5">
                         <span className="text-xs uppercase tracking-widest text-white/40">
                             {track.duration}
                         </span>
