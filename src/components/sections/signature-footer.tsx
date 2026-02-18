@@ -64,14 +64,14 @@ export function SignatureFooter() {
                     <div className="flex items-center gap-6">
                         <span className="text-white/20 text-xs text-right">
                             <span className="hidden md:inline">Design & Development by </span>
-                            <a href="#" className="hover:text-white/40 transition-colors">Gemini</a>
+                            <a href="https://www.wideech.com" target="_blank" rel="noopener noreferrer" className="hover:text-white/40 transition-colors">Wideech</a>
                         </span>
                     </div>
                 </div>
             </div>
 
             {/* Big Signature overlay */}
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.03]">
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.1]">
                 <h1 className="font-serif text-[20vw] bg-clip-text text-transparent bg-gradient-to-t from-white to-transparent text-center leading-none select-none">
                     MORA
                 </h1>
